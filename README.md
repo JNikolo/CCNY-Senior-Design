@@ -4,13 +4,11 @@ This repository is for the Senior Design class Project.
 Team Name: Net Design 
 
 Team Members & Roles & GitHub:
-
 1) Jair Ruiz   - Leader(https://github.com/JNikolo)
 2) Usman Abbas - Systems Savvy(https://github.com/uscod)
 3) Evan Perez  - TechSmith(https://github.com/evanperez444)
 
 Project Ideas:
-
 1) 
 
 About Us: 
