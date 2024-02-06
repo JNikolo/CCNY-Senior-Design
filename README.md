@@ -9,7 +9,7 @@ Team Members & Roles:
 3) Evan Perez  - TechSmith(https://github.com/evanperez444)
 
 Project Ideas:
-1) 
+
 
 About Us: 
 https://docs.google.com/presentation/d/1SBlGVdz81NUZDpsXQ5xZXaC7oOi-OAkKURFXmy4CcT8/edit?usp=sharing
