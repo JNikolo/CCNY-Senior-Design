@@ -21,14 +21,17 @@ The goal is to provide users with a seamless and insightful experience by seamle
 #### Project Description
 This project aims to create a Question and Answer system capable of giving the user the experience to chat with its favorite API.
 #### Background
+- [How to build your AI ChatBot with NLP in Python](https://www.analyticsvidhya.com/blog/2021/10/complete-guide-to-build-your-ai-chatbot-with-nlp-in-python/)
+- [Q – Learning Algorithm with Step-by-Step Implementation using Python](https://www.analyticsvidhya.com/blog/2021/04/q-learning-algorithm-with-step-by-step-implementation-using-python/)
 
 ---
 
 ### 3. Chatbot to create Minecraft worlds specifying the structures you want.
 #### Project Description
-This project seeks to give users the ability to create Minecraft (Mojang 2009) worlds with user's described structures by using a seamless chatbot.
+This project seeks to allow users to create Minecraft (Mojang 2009) worlds with user's user-described structures by using a seamless chatbot.
 #### Background
 - [An LLM Chatbot in Minecraft with Educational Applications](https://www.researchgate.net/publication/377748743_An_LLM_Chatbot_in_Minecraft_with_Educational_Applications)
+- [How to make an AI chatbot for your game](https://devforum.roblox.com/t/how-to-make-an-ai-chat-bot-for-your-game/2578050)
 ## Team Members
 - [Jair Ruiz](https://github.com/JNikolo) - Leader
 - [Usman Abbas](https://github.com/uscod) - Systems Savvy
