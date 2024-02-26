@@ -28,7 +28,7 @@ This project aims to create a Question and Answer system capable of giving the u
 #### Project Description
 This project seeks to give users the ability to create Minecraft (Mojang 2009) worlds with user's described structures by using a seamless chatbot.
 #### Background
-
+- [An LLM Chatbot in Minecraft with Educational Applications](https://www.researchgate.net/publication/377748743_An_LLM_Chatbot_in_Minecraft_with_Educational_Applications)
 ## Team Members
 - [Jair Ruiz](https://github.com/JNikolo) - Leader
 - [Usman Abbas](https://github.com/uscod) - Systems Savvy
