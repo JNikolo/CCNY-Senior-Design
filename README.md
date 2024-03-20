@@ -1,5 +1,7 @@
 # CCNY-Senior-Design
 This repository is for the Senior Design class Project. 
+Main Project Idea Pushed into main. 
+Project Idea-page-ONLY
 
 # Net Design 
 
