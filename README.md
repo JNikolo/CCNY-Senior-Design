@@ -12,28 +12,17 @@ This project aims to create an interactive platform designed for hands-on explor
 **Key Features:**
 1. Enhanced Visualization: Incorporate advanced visualization tools to provide users with an intuitive understanding of how RAG models performed. Visualize answer correctness histogram, document embedding similarity map.
 
-2. Integration with External APIs: Allow integration with external APIs or datasets to expand the capabilities of the application. Users can access specialized databases or domain-specific knowledge sources to enhance the retrieval process and generate more accurate responses.
+2. Integration with External Data: Allow integration with external datasets to expand the capabilities of the application. Users can access specialized databases or domain-specific knowledge sources to enhance the retrieval process and generate more accurate responses.
 
 3. Customization Options: Provide users with the ability to customize various parameters of the RAG models, such as the retrieval strategy, generation settings, and input data sources. This flexibility enables users to tailor the platform to their specific use cases and preferences.
 
 4. Performance Metrics: Include performance metrics and analytics to evaluate the effectiveness of the RAG models. Measure response times, accuracy, and relevance of the generated responses to provide users with valuable insights into the model's performance and capabilities.
 
-5. **(Tentative)** Accessibility: Ensure that the app is accessible to users with different levels of expertise and diverse backgrounds. Provide user-friendly interfaces, clear documentation, and support for multiple languages to make the platform inclusive and accessible to all users.
-
-6. **(Not defined)** Improving RAG:
-   + Helps users with recommendations based on the performance metrics results using a fine-tuned LLM. The user tries again and the previous results are shown with the current ones.
-   + Ensures that RAG is improved using a user-feedback mechanism where people can post their rag parameters, and based on the feedback the team tries to improve it.
-   + Provides information, and external links to help users improve their systems. The results of a previous round and current round are shown, the user decides which one to use.
+5. Improving RAG: Helps users with recommendations based on the performance metrics results using a fine-tuned LLM. The user tries again and the previous results are shown with the current ones.
      
-### Tools/Software to be used (tentative)
-- OpenAI API
-- HuggingFace
-- RAGAs
-- Langchain
-- Streamlit
-
 ### Background
 ---
+<!--
 #### RAG Literacy
 
 - [**Knowledge Retrieval Via The OpenAI Playground**](https://cobusgreyling.medium.com/knowledge-retrieval-via-the-openai-playground-8b04682ebe37)  
@@ -58,9 +47,19 @@ The paper delves into the challenges faced by Large Language Models (LLMs), such
 
 - [**Personalized RAG Engine for Low- Latency & High-Performance**](https://medium.com/@bijit211987/personalized-rag-engine-for-low-latency-high-performance-bb07b827a5f7)  
 The article explores the construction of a Retrieval-Augmented Generation (RAG) system tailored to personalized data, which combines neural retrieval with text generation models for low latency access to vast personal datasets. It provides a comprehensive guide covering architecture, data ingestion, neural search index optimization, encoding strategies, retrieval model training, re-ranking, text generation model pre-training, query parsing, RAG model integration, user personalization, scalability, and testing & validation. The RAG pipeline enables natural language querying across personal data, resulting in accurate and responsive responses, with significant gains in performance metrics. The article emphasizes the importance of personalization in improving alignment with user language patterns and mental models. Additionally, it discusses scalability considerations and testing methodologies, concluding that RAG systems offer transformative access to personal information and anticipate further advancements in the field.
+-->
+### Tools/articles
 
-#### RAG Evaluation
+| Tools | Summary |
+|-----------------|-----------------|
+| [Ragas](https://github.com/explodinggradients/ragas) | Ragas is a framework for evaluating Retrieval Augmented Generation (RAG) pipelines, which enhance Language Model (LM) applications with external data. It offers advanced tools to assess LM-generated text, enabling insights into pipeline performance. |
+| [Tonic Validate Ragas Logger](https://github.com/TonicAI/tonic_ragas_logger) | The Tonic Validate Ragas Logger is a tool that facilitates the uploading of Ragas evaluation results to the Tonic Validate UI for visualization |
+| [LLM Finetuning](https://github.com/ashishpatel26/LLM-Finetuning) | Project focused on efficiently fine-tuning large language models using LoRA and Hugging Face's transformers library. |
+| [Streamlit](https://docs.streamlit.io/) | Open-source Python library that makes it easy to create and share beautiful, custom web apps for machine learning and data science. |
+| [Visualizing RAG Data](https://towardsdatascience.com/visualize-your-rag-data-evaluate-your-retrieval-augmented-generation-system-with-ragas-fc2486308557) | The article introduces a methodology for evaluating Retrieval-Augmented Generation (RAG) systems using interactive visualization techniques. It outlines steps for building a RAG system, generating evaluation questions, and assessing system performance. The evaluation involves metrics such as answer correctness, which is analyzed in conjunction with question and document embeddings using UMAP-based visualizations. The article demonstrates how to use Renumics Spotlight to visualize and interpret the results, identifying patterns and clusters within the data to gain deeper insights into system behavior. Overall, the approach offers a comprehensive method for evaluating and understanding RAG systems, facilitating informed decision-making in software development. |
+| [Langchain](https://github.com/langchain-ai/langchain) | A framework for developing applications powered by language models. It enables applications that: Are context-aware: connect a language model to sources of context (prompt instructions, few shot examples, content to ground its response in, etc.); Reason: rely on a language model to reason (about how to answer based on provided context, what actions to take, etc.) |
 
+<!--
 - [**An Overview on RAG Evaluation**](https://weaviate.io/blog/rag-evaluation)  
 The article delves into the evaluation and optimization of Retrieval Augmented Generation (RAG) systems, which enhance Large Language Models (LLMs) with context retrieved from vector databases like Weaviate. Inspired by advancements in using LLMs for evaluation, the authors explore new trends, metrics, and tuning approaches for RAG systems. They discuss the distinctions between RAG and Agent systems and propose methods for managing experimental configurations. The article aims to provide insights into enhancing the performance and effectiveness of RAG applications, particularly in chatbots and question-answering systems.
 
@@ -104,7 +103,7 @@ The video is a recorded talk by Jerry Liu, CEO of LlamaIndex, from the AI Engine
 ---
 - [**Meet RAGxplorer: An interactive AI Tool to Support the Building of Retrieval Augmented Generation (RAG) Applications by Visualizing Document Chunks and the Queries in the Embedding Space**](https://www.marktechpost.com/2024/01/25/meet-ragxplorer-an-interactive-ai-tool-to-support-the-building-of-retrieval-augmented-generation-rag-applications-by-visualizing-document-chunks-and-the-queries-in-the-embedding-space/)  
 The article introduces RAGxplorer, an interactive AI tool designed to support the development of Retrieval Augmented Generation (RAG) applications by visualizing document chunks and queries in an embedding space. RAGxplorer breaks documents into smaller, overlapping chunks and converts them into mathematical representations called embeddings. These embeddings are then visualized in a 2D or 3D space, allowing users to assess how well RAG models understand the document. The tool's flexibility in handling various document formats and query expansion techniques enhances its effectiveness in revealing semantic relationships within documents, helping users identify biases, knowledge gaps, and overall model performance. RAGxplorer addresses the challenges of visualizing complex language models, making it a valuable resource for researchers, developers, and practitioners seeking deeper insights into these advanced systems.
-
+-->
 ## Team Members
 - [Jair Ruiz](https://github.com/JNikolo) - Leader
 - [Usman Abbas](https://github.com/uscod) - Systems Savvy
