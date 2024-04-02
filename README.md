@@ -5,7 +5,7 @@ This repository is for the Senior Design class Project.
 ## Team Members
 - [Jair Ruiz](https://github.com/JNikolo) - Leader
 - [Usman Abbas](https://github.com/uscod) - Systems Savvy
-- [Evan Perez](https://github.com/evanperez444) - TechSmith
+- [Evan Perez](https://github.com/evanperez444) - Tech-Smith
 ## Project Idea
 ### RAG Playground
 This project aims to create an interactive platform designed for hands-on exploration of Retrieval-Augmented Generation (RAG) models. It offers users a user-friendly interface to experiment with RAG in real-time, allowing for parameter customization, enhanced visualization, integration with external APIs, performance metrics, and accessibility features.  
