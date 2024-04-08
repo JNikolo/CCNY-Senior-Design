@@ -8,8 +8,8 @@ This repository is for the Senior Design class Project.
 - [Evan Perez](https://github.com/evanperez444) - Tech-Smith
 ## Project Idea
 ### RAG Playground
-This project aims to create an interactive platform designed for hands-on exploration of Retrieval-Augmented Generation (RAG) models. It offers users a user-friendly interface to experiment with RAG in real-time, allowing for parameter customization, enhanced visualization, integration with external APIs, performance metrics, and accessibility features.  
-![image](https://github.com/JNikolo/CCNY-Senior-Design/assets/125705821/78912715-a637-4ccb-bc38-63d021181509)
+This project aims to create an interactive platform designed for hands-on exploration of Retrieval-Augmented Generation (RAG) models. It offers users a user-friendly interface to experiment with RAG in real-time, allowing for parameter customization, enhanced visualization, integration with external APIs, performance metrics, and accessibility features. Once the pipeline is created, a query is tested and a fine-tuned LLM will tell if the pipeline is good or bad.
+![image](https://github.com/JNikolo/CCNY-Senior-Design/assets/125705821/c24bbe8b-92c8-47bb-b10f-3807fb81b654)
 
 
 **Key Features:**
