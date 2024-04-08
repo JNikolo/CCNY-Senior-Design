@@ -9,7 +9,8 @@ This repository is for the Senior Design class Project.
 ## Project Idea
 ### RAG Playground
 This project aims to create an interactive platform designed for hands-on exploration of Retrieval-Augmented Generation (RAG) models. It offers users a user-friendly interface to experiment with RAG in real-time, allowing for parameter customization, enhanced visualization, integration with external APIs, performance metrics, and accessibility features. Once the pipeline is created, a query is tested and a fine-tuned LLM will tell if the pipeline is good or bad.
-![image](https://github.com/JNikolo/CCNY-Senior-Design/assets/125705821/c24bbe8b-92c8-47bb-b10f-3807fb81b654)
+![image](https://github.com/JNikolo/CCNY-Senior-Design/assets/125705821/3606ff26-e0e6-44bb-8a69-9a7d40e46d67)
+
 
 
 **Key Features:**
