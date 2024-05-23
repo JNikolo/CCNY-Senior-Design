@@ -25,7 +25,12 @@ This project focuses on building/finetuning a deep learning model to perform abs
 5. Performance Comparison: Allowing users to compare the summarization performance of our model against the AI system.
      
 ---
+## Project Proposal
 
+You can access to our project proposal [here](SD_Propject_Proposal.pdf)
+For a summarized version check the slides of our final presentation [here](SD_Final_presentation.pdf)
+
+---
 ## Ideas collection (Background)
 The following is a collection of previous work that relates to our project idea.
 | Ideas | Overview | Components/Techniques | Technology/Libraries/Tools | Notes |
