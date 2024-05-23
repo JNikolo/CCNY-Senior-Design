@@ -9,9 +9,7 @@ This repository is for the Senior Design class Project.
 ## Project Idea
 ### RAG Playground
 This project focuses on building/finetuning a deep learning model to perform abstractive text summarization. Additionally, the project aims to create an interactive platform for hands-on exploration of Retrieval-Augmented Generation (RAG) systems. Users will be able to compare the performance of the standalone model with that of the RAG system in summarization tasks. The platform will feature a user-friendly interface for real-time experimentation with RAG, offering customization of parameters, enhanced visualizations, and detailed performance metrics to facilitate in-depth analysis and understanding.
-![image](https://github.com/JNikolo/CCNY-Senior-Design/assets/125705821/1317dfdc-abab-4a48-9fb4-9f3a0a7f8dfc)
-
-
+![image](https://github.com/JNikolo/CCNY-Senior-Design/assets/125705821/6c4abf42-2fba-4084-a32c-974465161a3d)
 
 **Key Features:**
 1. Enhanced Visualization: Incorporate advanced visualization tools to provide users with an intuitive understanding of how RAG models performed. Visualize answer correctness histogram, document embedding similarity map.
@@ -27,8 +25,8 @@ This project focuses on building/finetuning a deep learning model to perform abs
 ---
 ## Project Proposal
 
-You can access to our project proposal [here](SD_Propject_Proposal.pdf)
-For a summarized version check the slides of our final presentation [here](SD_Final_presentation.pdf)
+- You can access to our project proposal [here](SD_Propject_Proposal.pdf)  
+Note: For a summarized version check the slides of our final presentation [here](SD_Final_presentation.pdf)
 
 ---
 ## Ideas collection (Background)
