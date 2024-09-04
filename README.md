@@ -10,6 +10,11 @@ This repository is for the Senior Design class Project.
 - [Project Proposal](#project-proposal)
      - [Project Plan](#project-plan) 
 - [Project Development Research](#project-development-research)
+  - [Ideas Collection](#ideas-collection)
+  - [Datasets](#datasets)
+  - [Techniques and Methods](#techniques-and-methods)
+    - [Text Summarization](#text-summarization)
+    - [RAG Systems](#rag-system-development)
 - [About us](#about-us)
 
 -----
@@ -46,7 +51,7 @@ Note: For a summarized version check the slides of our final presentation [here]
 This Plan considers Week 1 starting on Monday, September 2nd 2024, and Week 15 ending on Wednesday, December 11th 2024.
 | Week | Tasks | Deliverables | Roles |
 |------|------|------|------|
-| 1    | <ul><li>Refine project plan.</li><li>Decide final environments for training and development</li><li>Choose languages and frameworks</li></ul>| <ul><li>[ ] Frameworks and environments</li><li>[X] Refined Project Plan</li></ul> | Everyone | 
+| 1    | <ul><li>Refine project plan.</li><li>Decide final environments for training and development</li><li>Choose languages and frameworks</li></ul>| <ul><li>[X] Refined Project Plan</li><li>[ ] Frameworks and environments</li></ul> | Everyone | 
 | 2    | <ul><li>Select specific datasets for model training</li><li>Research/choose ML model architecture.</li></ul> | <ul><li>[ ] Dataset and Model Architecture Selection</li></ul> | Everyone | 
 | 3    | <ul><li>Obtain data</li><li>Begin pre-processing.</li></ul> | <ul><li>[ ] Notebook with pre-processing functions</li></ul>| <ul><li>**Usman**: Get data</li><li>**Evan & Jair**: Pre-processing</li></ul> |
 | 4    | <ul><li>Complete pre-processing</li><li>Start model training.>/li></ul> | <ul><li>[ ] Notebook with architecture and training</li></ul> | <ul><li>**Usman & Evan**: Train model</li><li>**Jair**: Finish pre-processing</li></ul> |
@@ -65,7 +70,7 @@ This Plan considers Week 1 starting on Monday, September 2nd 2024, and Week 15 e
 
 ---
 ##  Project Development Research
-### Ideas collection (Background)
+### Ideas collection
 The following is a collection of previous work that relates to our project idea.
 | Ideas | Overview | Components/Techniques | Technology/Libraries/Tools | Notes |
 |-------|---------|-------|---------|---------|
@@ -82,7 +87,7 @@ The following is a collection of datasets that can be used to perform summarizat
 | [Scientific Papers Dataset](https://huggingface.co/datasets/armanc/scientific_papers)  | This large dataset contains two sets of long and structured documents. The datasets are obtained from ArXiv and PubMed OpenAccess repositories. | The ArXiv and PubMed datasets have +200K and +100k rows respectively. <details><summary>**Read more**</summary><ul><li><b>arXiv:</b><ul><li><b>Train:</b> 203,037</li><li><b>Validation:</b> 6,436</li><li><b>Test:</b> 6,440</li></ul></li><li><b>PubMed:</b><ul><li><b>Train:</b> 119,924</li><li><b>Validation:</b> 6,633</li><li><b>Test:</b> 6,658</li></ul></li></ul> | Both datasets have the columns: article, abstract, section_names; all the features are string.<details><summary>**Read more**</summary><ul><li><b>Article:</b> The body of the document, paragraphs separated by "/n".</li><li><b>Abstract:</b> The abstract of the document, paragraphs separated by "/n".</li><li><b>Section Names:</b> Titles of sections, separated by "/n".</li></ul></details> | Academic Paper | ✅ | In these datasets, the abstract is used as the summary. | 
 | [CNN/Daily Mail Dataset](https://www.kaggle.com/datasets/gowrishankarp/newspaper-text-summarization-cnn-dailymail) | The CNN / DailyMail Dataset is an English-language dataset containing just over 300k unique news articles as written by journalists at CNN and the Daily Mail. | This dataset contains +300k rows. <details><summary>**Read more**</summary><ul><li><b>Dataset Split:</b><ul><li><b>Train:</b> 287,113 instances</li><li><b>Validation:</b> 13,368 instances</li><li><b>Test:</b> 11,490 instances</li></ul></li></ul></details> | The dataset contains the columns: id, article and highlights. All of them are strings.<details><summary>**Read more**</summary><ul><li><b>ID:</b> A string containing the hexadecimal formatted SHA1 hash of the URL where the story was retrieved from</li><li><b>Article:</b> A string containing the body of the news article</li><li><b>Highlights:</b> A string containing the highlight of the article as written by the article author</li></ul></details> | News | ✅ | In the dataset, the highlights field is used as the summary of the text to perform evaluation. |
 
-### Techniques/methods
+### Techniques and methods
 The following is a collection of techniques for text summarization and to create the RAG systems.
 #### Text Summarization
 | Technique | Overview | Key Features | Pros/Cons | Use-cases | when is needed? | Notes |
