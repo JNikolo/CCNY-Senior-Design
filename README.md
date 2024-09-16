@@ -8,7 +8,8 @@ This repository is for the Senior Design class Project.
 - [RAG Playground](#rag-playground)
   - [Key Features](#key-features) 
 - [Project Proposal](#project-proposal)
-     - [Project Plan](#project-plan) 
+     - [Project Plan](#project-plan)
+     - [Project updates](#project-updates)
 - [Project Development Research](#project-development-research)
   - [Ideas Collection](#ideas-collection)
   - [Datasets](#datasets)
@@ -47,6 +48,8 @@ This project focuses on building/finetuning a deep learning model to perform abs
 - You can access to our project proposal [here](SD_Propject_Proposal.pdf)  
 Note: For a summarized version check the slides of our final presentation [here](SD_Final_presentation.pdf)
 
+## Project Updates
+- **09/16/2024**: [Slides](https://docs.google.com/presentation/d/1zdITAq-Jup3Cn-_ZQrCusIorHMXZGKbc2iP00UaLSrc/edit?usp=drivesdk)
 ### Project Plan
 This Plan considers Week 1 starting on Monday, September 2nd 2024, and Week 15 ending on Wednesday, December 11th 2024.
 | Week | Tasks | Deliverables | Roles |
