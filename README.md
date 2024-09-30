@@ -50,6 +50,7 @@ Note: For a summarized version check the slides of our final presentation [here]
 
 ## Project Updates
 - **09/16/2024**: [Slides](https://docs.google.com/presentation/d/1zdITAq-Jup3Cn-_ZQrCusIorHMXZGKbc2iP00UaLSrc/edit?usp=drivesdk)
+- **09/30/2024**: Added Notebooks of data mining and data pre-processing [here](./Notebooks/README.md)
 ### Project Plan
 This Plan considers Week 1 starting on Monday, September 2nd 2024, and Week 15 ending on Wednesday, December 11th 2024.
 | Week | Tasks | Deliverables | Roles |
