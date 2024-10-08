@@ -17,3 +17,8 @@ You can run this notebook by Google Colab or Jupyter Notebooks with no problem. 
 This notebook contains all the code to process the CNN/Daily-mail News Dataset and an initial set up for training a seq2seq model with an attention layer.
 The training stills needs work, but we were able to set up the initial architecture.
 You can run this notebook by Google Colab or Jupyter Notebooks with no problem. Execute the cells one by one.
+
+## [First Training (Week 7)](./SD2_model_train_2.ipynb)
+This notebook contains all the code to process the CNN/Daily-mail News Dataset and pipeline for training a seq2seq model with an attention layer.
+The model stills needs work, but we were able to set up, and train the initial architecture.
+You can run this notebook by Google Colab or Jupyter Notebooks with no problem. Execute the cells one by one.
