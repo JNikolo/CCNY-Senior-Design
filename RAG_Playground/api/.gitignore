@@ -1,0 +1,6 @@
+.venv
+model_69.keras
+x_tokenizer.pickle
+y_tokenizer.pickle
+.env
+__pycache__
