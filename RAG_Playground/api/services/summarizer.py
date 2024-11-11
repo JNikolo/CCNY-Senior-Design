@@ -15,6 +15,9 @@ class TextSummarizer:
     MAX_LEN_SUMMARY = 10
     X_TOKENIZER_PATH = X_TOKENIZER_PATH
     Y_TOKENIZER_PATH = Y_TOKENIZER_PATH
+    LAST_TRAINED_DATE = '2024-10-29'
+    ACCURACY = 0.69
+    LOSS = 0.15
 
     def __init__(self):
         self.model = load_model(MODEL_PATH, custom_objects={'ScaledDotProductAttention': ScaledDotProductAttention})
@@ -95,3 +98,29 @@ class TextSummarizer:
             e_h, e_c = h, c
 
         return decoded_sentence.strip()
+    
+    def summarize_batch(self, texts):
+        summaries = []
+        for text in texts:
+            summary = self.summarize(text)
+            summaries.append(summary)
+        return summaries
+    
+    def evaluate_batch(self, texts, references, metrics=['rouge1', 'rougeL']):
+        scorer = rouge_scorer.RougeScorer(metrics, use_stemmer=True)
+        total_scores = {key : [0.0, 0.0] for key in metrics}
+
+        summaries = self.summarize_batch(texts)
+
+        for ref, hyp in zip(references, summaries):
+            score = scorer.score(ref, hyp)
+            total_scores['rouge1'][0] += score['rouge1'].fmeasure
+            total_scores['rouge2'][0] += score['rouge2'].fmeasure
+            total_scores['rougeL'][0] += score['rougeL'].fmeasure
+            total_scores['rouge1'][1] += 1
+            total_scores['rouge2'][1] += 1
+            total_scores['rougeL'][1] += 1
+
+        # Calculate average scores
+        avg_scores = {key: total / count for key, (total, count) in zip(total_scores.keys(), total_scores.values())}
+        return avg_scores
