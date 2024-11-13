@@ -83,7 +83,7 @@ Now, please provide a single-sentence summary for the following review:
         """Evaluate the generated summary against the reference summary"""
         scorer = rouge_scorer.RougeScorer(metrics, use_stemmer=True)
         scores = scorer.score(summary, reference_summary)
-        return scores
+        return {metric: score.fmeasure for metric, score in scores.items()}
 
     def evaluate_batch(self, reference_summaries: List[str], summaries: List[str], metrics: List[str] = ['rouge1', 'rougeL']) -> dict:
         """Evaluate the generated summaries against reference summaries"""

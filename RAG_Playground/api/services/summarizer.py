@@ -60,7 +60,7 @@ class TextSummarizer:
         scorer = rouge_scorer.RougeScorer(metrics, use_stemmer=True)
         scores = scorer.score(summary, reference_summary)
         
-        return scores
+        return {metric: score.fmeasure for metric, score in scores.items()}
 
     def predict(self, input_seq):
         # Encode the input as state vectors.

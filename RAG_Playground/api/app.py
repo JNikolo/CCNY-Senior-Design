@@ -7,6 +7,8 @@ from typing import Tuple, Dict, Any, List, Optional
 
 from services.summarizer import TextSummarizer
 from services.geminiSummarizer import GeminiSummarizer
+from services.injectData import VectorDB
+from services.scrapper import ReviewScraper
 
 app = Flask(__name__)
 app.config['APPLICATION_ROOT'] = '/api/v1'
@@ -15,6 +17,8 @@ app.config['JSON_SORT_KEYS'] = False
 
 model = TextSummarizer()
 geminiModel = GeminiSummarizer()
+vectorDB = VectorDB()
+scrapper = ReviewScraper()
 
 # Custom Exceptions
 class APIError(Exception):
@@ -201,6 +205,35 @@ def generate_summary():
     except Exception as e:
         app.logger.error(f"LLM summarization failed: {str(e)}")
         raise APIError('Error generating LLM summary', 500)
+    
+@app.route('/llm_evaluate', methods=['POST'])
+@require_api_key
+def evaluate_summary():
+    """Evaluate LLM summary with enhanced validation and error handling."""
+    try:
+        data = request.get_json()
+        is_valid, error = validate_evaluation_input(data)
+        if not is_valid:
+            raise APIError(error, 400)
+            
+        reference_summary = data['reference_summary']
+        summary = geminiModel.generate_summary(data['text'])
+        metrics = data.get('metrics', ['rouge1', 'rougeL'])
+        
+        scores = geminiModel.evaluate(reference_summary, summary, metrics)
+        
+        result = {
+            'reference_summary': reference_summary,
+            'summary': summary,
+            'scores': scores,
+            'timestamp': datetime.now(timezone.utc).isoformat()
+        }
+        return jsonify(result)
+    except APIError:
+        raise
+    except Exception as e:
+        app.logger.error(f"LLM evaluation failed: {str(e)}")
+        raise APIError('Error evaluating LLM summary', 500)
 
 @app.route('/dual_summarize', methods=['POST'])
 @require_api_key
@@ -265,6 +298,64 @@ def dual_evaluate():
     except Exception as e:
         app.logger.error(f"Dual evaluation failed: {str(e)}")
         raise APIError('Error evaluating dual summaries', 500)
+    
+@app.route('/api/v1/inject', methods=['POST'])
+@require_api_key
+def inject_data():
+    """Inject data into the vector database."""
+    try:
+        data = request.get_json()
+        if not data or not isinstance(data, dict):
+            raise APIError('Invalid request format', 400)
+        
+        if 'url' not in data or not isinstance(data['url'], str):
+            raise APIError("Missing or invalid 'reviews' field", 400)
+        
+
+        url = data['url']
+        max_reviews = data.get('max_reviews', 10)
+
+        print(f"Injecting data from URL: {url}")
+
+        reviews = scrapper.get_reviews(url, max_reviews)
+
+        print(f"Scraped {len(reviews)} reviews from {url}")
+
+        vectorDB.add_reviews(reviews)
+        
+        return jsonify({'message': f"Added {len(reviews)} reviews to the vector database"})
+    except APIError:
+        raise
+    except Exception as e:
+        print(f"Data injection failed: {str(e)}")
+        raise APIError('Error injecting data', 500)
+    
+@app.route('/api/v1/search', methods=['POST'])
+@require_api_key
+def search():
+    """Search for similar reviews in the vector database."""
+    try:
+        data = request.get_json()
+        if not data or not isinstance(data, dict):
+            raise APIError('Invalid request format', 400)
+        
+        if 'query' not in data or not isinstance(data['query'], str):
+            raise APIError("Missing or invalid 'query' field", 400)
+        
+        query = data['query']
+        top_k = data.get('top_k', 5)
+        
+        results = vectorDB.search(query, top_k)
+
+        summaries = model.summarize_batch(results)
+        
+        return jsonify({'results': summaries})
+    except APIError:
+        raise
+    except Exception as e:
+        app.logger.error(f"Search failed: {str(e)}")
+        raise APIError('Error searching reviews', 500)
+
 
 if __name__ == '__main__':
     app.run('127.0.0.1', 5000, debug=True)
