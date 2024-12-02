@@ -45,21 +45,53 @@ Now, please provide a single-sentence summary for the following review:
                 response = self.model.generate_content(
                     prompt,
                     generation_config=genai.types.GenerationConfig(
-                        temperature=0.3,
+                        temperature=0,
                         top_p=0.8,
                         top_k=40,
-                        max_output_tokens=10  # Limited tokens for single sentence
+                        #max_output_tokens=50  # Limited tokens for single sentence
                     )
                 )
                 # Clean up the response and ensure it's a single sentence
                 summary = response.text.strip()
-                summary = summary.split('.')[0] + '.'  # Keep only first sentence
+                #summary = summary.split('.')[0] + '.'  # Keep only first sentence
                 return summary
                 
             except Exception as e:
                 retries += 1
                 if retries == max_retries:
                     print(f"Error generating summary: {str(e)}")
+                    return None
+                time.sleep(2)
+        
+        return None
+    
+    def perform_rag(self, reviews: List[str], query: str, max_retries: int = 3) -> str:
+        """Perform Retrieval-Augmented Generation (RAG) with the Gemini model"""
+        # Combine reviews into a single context
+        context = "\n\n".join(reviews)
+        
+        prompt = f"Context:\n{context}\n\nQuery:\n{query}\n\nAnswer:"
+        
+        retries = 0
+        while retries < max_retries:
+            try:
+                response = self.model.generate_content(
+                    prompt,
+                    generation_config=genai.types.GenerationConfig(
+                        temperature=0.7,
+                        top_p=0.9,
+                        top_k=50,
+                        #max_output_tokens=150  # Adjust as needed
+                    )
+                )
+                # Clean up the response
+                answer = response.text.strip()
+                return answer
+                
+            except Exception as e:
+                retries += 1
+                if retries == max_retries:
+                    print(f"Error performing RAG: {str(e)}")
                     return None
                 time.sleep(2)
         

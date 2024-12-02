@@ -52,3 +52,11 @@ class VectorDB:
                 results.append(self.reviews[idx])
         
         return results
+    
+    def clear(self):
+        """
+        Clears the vector database.
+        """
+        self.index.reset()
+        self.reviews = []
+        print("Vector database cleared.")

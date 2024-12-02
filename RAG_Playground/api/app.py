@@ -12,7 +12,6 @@ from services.scrapper import ReviewScraper
 
 app = Flask(__name__)
 app.config['APPLICATION_ROOT'] = '/api/v1'
-app.config['API_KEYS'] = {'valid-api-key'}    # In production, use secure storage
 app.config['JSON_SORT_KEYS'] = False
 
 model = TextSummarizer()
@@ -38,17 +37,6 @@ def handle_generic_error(error):
     response = jsonify({'error': 'An unexpected error occurred'})
     response.status_code = 500
     return response
-
-# Authentication Decorators
-def require_api_key(f):
-    @wraps(f)
-    def decorated(*args, **kwargs):
-        api_key = request.headers.get('X-API-Key')
-        if not api_key or api_key not in app.config['API_KEYS']:
-            raise APIError('Invalid or missing API key', 401)
-        return f(*args, **kwargs)
-    return decorated
-
 
 # Input Validation Functions
 def validate_text(data: Dict[str, Any]) -> Tuple[bool, Optional[str]]:
@@ -108,7 +96,6 @@ def validate_evaluation_input(data: Dict[str, Any]) -> Tuple[bool, Optional[str]
 
 # Enhanced API Routes
 @app.route('/status')
-@require_api_key
 def status():
     """Check model status with enhanced error handling."""
     try:
@@ -131,7 +118,6 @@ def status():
         raise APIError('Error checking model status', 500)
 
 @app.route('/summarize', methods=['POST'])
-@require_api_key
 def summarize():
     """Generate summary with enhanced validation and error handling."""
     try:
@@ -152,9 +138,27 @@ def summarize():
     except Exception as e:
         app.logger.error(f"Summarization failed: {str(e)}")
         raise APIError('Error generating summary', 500)
+    
+@app.route('/summarize_batch', methods=['POST'])
+def summarize_batch():
+    """Generate summaries for a batch of texts with enhanced validation and error handling."""
+    try:
+        data = request.get_json()
+        if not data or not isinstance(data, dict):
+            raise APIError('Invalid request format', 400)
+        summaries = model.summarize_batch(data.get('texts', []))
+
+        return jsonify({
+            'summaries': summaries,
+            'timestamp': datetime.now(timezone.utc).isoformat()
+        })
+    except APIError:
+        raise
+    except Exception as e:
+        app.logger.error(f"Batch summarization failed: {str(e)}")
+        raise APIError('Error generating summaries', 500)
 
 @app.route('/evaluate', methods=['POST'])
-@require_api_key
 def evaluate():
     """Evaluate summaries with enhanced validation and error handling."""
     try:
@@ -184,7 +188,6 @@ def evaluate():
         raise APIError('Error evaluating summary', 500)
 
 @app.route('/llm_summarize', methods=['POST'])
-@require_api_key
 def generate_summary():
     """Generate LLM summary with enhanced validation and error handling."""
     try:
@@ -207,7 +210,6 @@ def generate_summary():
         raise APIError('Error generating LLM summary', 500)
     
 @app.route('/llm_evaluate', methods=['POST'])
-@require_api_key
 def evaluate_summary():
     """Evaluate LLM summary with enhanced validation and error handling."""
     try:
@@ -236,7 +238,6 @@ def evaluate_summary():
         raise APIError('Error evaluating LLM summary', 500)
 
 @app.route('/dual_summarize', methods=['POST'])
-@require_api_key
 def dual_summarize():
     """Generate dual summaries with enhanced validation and error handling."""
     try:
@@ -265,7 +266,6 @@ def dual_summarize():
         raise APIError('Error generating dual summaries', 500)
 
 @app.route('/dual_evaluate', methods=['POST'])
-@require_api_key
 def dual_evaluate():
     """Evaluate dual summaries with enhanced validation and error handling."""
     try:
@@ -299,8 +299,7 @@ def dual_evaluate():
         app.logger.error(f"Dual evaluation failed: {str(e)}")
         raise APIError('Error evaluating dual summaries', 500)
     
-@app.route('/api/v1/inject', methods=['POST'])
-@require_api_key
+@app.route('/inject', methods=['POST'])
 def inject_data():
     """Inject data into the vector database."""
     try:
@@ -311,13 +310,12 @@ def inject_data():
         if 'url' not in data or not isinstance(data['url'], str):
             raise APIError("Missing or invalid 'reviews' field", 400)
         
-
         url = data['url']
-        max_reviews = data.get('max_reviews', 10)
+        max_pages = data.get('max_pages', 1)
 
         print(f"Injecting data from URL: {url}")
 
-        reviews = scrapper.get_reviews(url, max_reviews)
+        reviews = scrapper.get_reviews(url, max_pages)
 
         print(f"Scraped {len(reviews)} reviews from {url}")
 
@@ -330,8 +328,7 @@ def inject_data():
         print(f"Data injection failed: {str(e)}")
         raise APIError('Error injecting data', 500)
     
-@app.route('/api/v1/search', methods=['POST'])
-@require_api_key
+@app.route('/search', methods=['POST'])
 def search():
     """Search for similar reviews in the vector database."""
     try:
@@ -348,14 +345,25 @@ def search():
         results = vectorDB.search(query, top_k)
 
         summaries = model.summarize_batch(results)
+
+        llm_summary = geminiModel.perform_rag(results, query)
         
-        return jsonify({'results': summaries})
+        return jsonify({'results': summaries, 'llm_summary': llm_summary, "reviews": results})
     except APIError:
         raise
     except Exception as e:
         app.logger.error(f"Search failed: {str(e)}")
         raise APIError('Error searching reviews', 500)
-
+    
+@app.route('/clean_db', methods=['POST'])
+def clean_db():
+    """Clean the vector database."""
+    try:
+        vectorDB.clear()
+        return jsonify({'message': 'Vector database cleaned successfully'})
+    except Exception as e:
+        app.logger.error(f"Database cleaning failed: {str(e)}")
+        raise APIError('Error cleaning database', 500)
 
 if __name__ == '__main__':
     app.run('127.0.0.1', 5000, debug=True)
