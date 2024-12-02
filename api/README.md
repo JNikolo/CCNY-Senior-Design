@@ -1,73 +1,49 @@
 # Text Summarization API Documentation
 
-## Table of Contents
-
-- [Overview](#overview)
-- [Installation](#installation)
-- [Core Components](#core-components)
-- [Quick Start](#quick-start)
-- [Detailed Usage Guide](#detailed-usage-guide)
-- [API Reference](#api-reference)
-- [Parameters Guide](#parameters-guide)
-- [Data Format](#data-format)
-- [Output Formats](#output-formats)
-- [Error Handling](#error-handling)
-- [Best Practices](#best-practices)
-- [Examples](#examples)
-
 ## Overview
 
-The Text Summarization API provides a comprehensive solution for training and using text summarization models. It uses a sequence-to-sequence architecture with attention mechanism to generate abstractive summaries from input texts.
+The Text Summarization API offers a powerful solution for training and deploying text summarization models. Built on a sequence-to-sequence architecture with attention mechanism, it excels at generating abstractive summaries from input texts.
 
 ### Key Features
+- State-of-the-art abstractive text summarization
+- Support for pre-trained models and custom training
+- Efficient batch processing capabilities
+- Built-in ROUGE score evaluation
+- Advanced text preprocessing and tokenization
+- Production-ready error handling
 
-- Abstractive text summarization
-- Pre-trained model support
-- Custom model training
-- Batch processing capability
-- ROUGE score evaluation
-- Flexible text preprocessing
-- Built-in tokenization management
+## Getting Started
 
-## Installation
+### Prerequisites
+The API requires Python 3.7 or higher and the following dependencies:
 
-# Required Dependencies
+```bash
+tensorflow >= 2.0.0
+nltk >= 3.6.0
+pandas >= 1.2.0
+numpy >= 1.19.0
+rouge-score >= 0.0.4
+beautifulsoup4 >= 4.9.0
+lxml >= 4.9.0
+```
 
-- Python >= 3.7
-- tensorflow >= 2.0.0
-- nltk >= 3.6.0
-- pandas >= 1.2.0
-- numpy >= 1.19.0
-- rouge-score >= 0.0.4
-- beautifulsoup4 >= 4.9.0
-- lxml >= 4.9.0
+### Installation
 
-These can be installed all at once by saving them to a `requirements.txt` file and running:
+Save the dependencies to `requirements.txt` and install:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-## Core Components
+### Quick Start Guide
 
-The API consists of four main classes:
-
-1. `SummarizerPipeline`: Main interface for the API
-2. `TextPreprocessor`: Handles text cleaning and preprocessing
-3. `TokenizerManager`: Manages text tokenization
-4. `ModelEvaluator`: Handles model evaluation and metrics
-
-## Quick Start
-
-### Basic Usage
+Generate a summary using a pre-trained model:
 
 ```python
 from text_summarizer import SummarizerPipeline
 
-# Initialize
+# Initialize and load pre-trained model
 summarizer = SummarizerPipeline()
-
-# Load pre-trained model
 summarizer.load_model(
     model_path='model.keras',
     x_tokenizer_path='x_tokenizer.pickle',
@@ -80,247 +56,159 @@ summary = summarizer.summarize(text)
 print(summary)
 ```
 
-### Training New Model
+## Core Components
+
+### 1. SummarizerPipeline
+
+The main interface that orchestrates all summarization operations.
+
+#### Configuration Options
+
+| Parameter       | Type | Default | Description                         |
+|----------------|------|---------|-------------------------------------|
+| max_text_len    | int  | 150     | Maximum input text length           |
+| max_summary_len | int  | 10      | Maximum summary length              |
+| latent_dim      | int  | 300     | LSTM hidden state dimension         |
+| embedding_dim   | int  | 100     | Word embedding dimension            |
+
+#### Key Methods
+
+**prepare_data(data_path, test_size=0.2)**
+```python
+# Prepare dataset for training
+x_tr, x_val, y_tr, y_val = summarizer.prepare_data(
+    data_path="dataset.csv",
+    test_size=0.2
+)
+```
+
+**train(x_tr, y_tr, x_val, y_val, epochs=50, batch_size=512)**
+```python
+# Train the model
+history = summarizer.train(
+    x_tr, y_tr,
+    x_val, y_val,
+    epochs=50,
+    batch_size=512
+)
+```
+
+**summarize(text)**
+```python
+# Generate summary
+summary = summarizer.summarize(text)
+```
+
+### 2. Data Specifications
+
+#### Training Data Format
+Required CSV structure:
+```csv
+Text,Summary
+"Original text content...","Reference summary"
+"Another text sample...","Another summary"
+```
+
+#### Model I/O
+- Input: Raw text (automatically truncated to max_text_len)
+- Output: Generated summary (constrained to max_summary_len)
+
+## Advanced Usage
+
+### Training Pipeline
 
 ```python
 # Initialize with custom parameters
 summarizer = SummarizerPipeline(
     max_text_len=150,
-    max_summary_len=10
+    max_summary_len=10,
+    latent_dim=300,
+    embedding_dim=100
 )
 
-# Prepare data and train
-x_tr, x_val, y_tr, y_val = summarizer.prepare_data("data.csv")
+# Prepare and train
+x_tr, x_val, y_tr, y_val = summarizer.prepare_data("training_data.csv")
 history = summarizer.train(x_tr, y_tr, x_val, y_val)
 
-# Save model
+# Save trained model
 summarizer.save_model(
-    model_path='my_model.keras',
-    x_tokenizer_path='x_tok.pickle',
-    y_tokenizer_path='y_tok.pickle'
+    model_path='custom_model.keras',
+    x_tokenizer_path='x_tokenizer.pickle',
+    y_tokenizer_path='y_tokenizer.pickle'
 )
+
+# Evaluate performance
+scores = summarizer.evaluate(x_val, y_val)
+print(f"ROUGE-1: {scores['rouge1']:.4f}")
+print(f"ROUGE-2: {scores['rouge2']:.4f}")
+print(f"ROUGE-L: {scores['rougeL']:.4f}")
 ```
 
-## Detailed Usage Guide
-
-### 1. SummarizerPipeline Class
-
-The main interface for all summarization operations.
-
-#### Initialization
+### Batch Processing
 
 ```python
-summarizer = SummarizerPipeline(
-    max_text_len=150,        # Maximum length of input text
-    max_summary_len=10,      # Maximum length of summary
-    latent_dim=300,          # Size of LSTM hidden states
-    embedding_dim=100        # Size of word embeddings
-)
+texts = [
+    "First document to summarize...",
+    "Second document to summarize...",
+    "Third document to summarize..."
+]
+
+# Process multiple texts efficiently
+with summarizer.batch_mode():
+    summaries = [summarizer.summarize(text) for text in texts]
 ```
 
-#### Core Methods
+## Best Practices
 
-##### prepare_data()
+### Data Preparation
+1. Clean and normalize text data
+2. Remove duplicates and invalid entries
+3. Ensure dataset balance and quality
+4. Validate input/output length distributions
 
-Prepares dataset for training.
+### Model Training
+1. Start with default hyperparameters
+2. Implement early stopping
+3. Monitor validation metrics
+4. Save checkpoints regularly
+5. Use cross-validation for smaller datasets
 
-```python
-x_tr, x_val, y_tr, y_val = summarizer.prepare_data(
-    data_path="data.csv",    # Path to dataset
-    test_size=0.2           # Validation split ratio
-)
-```
+### Production Deployment
+1. Pre-load models at startup
+2. Implement robust error handling
+3. Use batch processing for multiple documents
+4. Monitor system resources and performance
+5. Implement proper logging and monitoring
 
-**Parameters:**
-
-- `data_path` (str): Path to CSV file containing text data
-- `test_size` (float): Proportion of data to use for validation (0.0 to 1.0)
-
-**Returns:**
-
-- Tuple of (x_train, x_val, y_train, y_val) arrays
-
-##### train()
-
-Trains the summarization model.
-
-```python
-history = summarizer.train(
-    x_tr,                   # Training texts
-    y_tr,                   # Training summaries
-    x_val,                  # Validation texts
-    y_val,                  # Validation summaries
-    epochs=50,             # Number of training epochs
-    batch_size=512         # Batch size
-)
-```
-
-**Parameters:**
-
-- `x_tr`, `y_tr`, `x_val`, `y_val`: Training and validation data
-- `epochs` (int): Number of training epochs
-- `batch_size` (int): Training batch size
-
-**Returns:**
-
-- Training history object containing loss and accuracy metrics
-
-##### summarize()
-
-Generates summary for input text.
-
-```python
-summary = summarizer.summarize(text)
-```
-
-**Parameters:**
-
-- `text` (str): Input text to summarize
-
-**Returns:**
-
-- str: Generated summary
-
-### 2. Data Format
-
-#### Input Data Format
-
-The training data CSV should contain at least two columns:
-
-- 'Text': Original text
-- 'Summary': Reference summary
-
-Example:
-
-```csv
-Text,Summary
-This is a long text...,This is the summary
-Another long text...,Another summary
-```
-
-#### Model Input/Output Specifications
-
-- Input text: String of any length (will be truncated to max_text_len)
-- Output summary: String (limited to max_summary_len)
-
-### 3. Parameters Guide
-
-#### Model Parameters
-
-| Parameter       | Type | Default | Description                         |
-| --------------- | ---- | ------- | ----------------------------------- |
-| max_text_len    | int  | 150     | Maximum length of input text        |
-| max_summary_len | int  | 10      | Maximum length of generated summary |
-| latent_dim      | int  | 300     | Dimension of LSTM hidden states     |
-| embedding_dim   | int  | 100     | Dimension of word embeddings        |
-
-#### Training Parameters
-
-| Parameter  | Type  | Default | Description                 |
-| ---------- | ----- | ------- | --------------------------- |
-| epochs     | int   | 50      | Number of training epochs   |
-| batch_size | int   | 64      | Training batch size         |
-| test_size  | float | 0.2     | Validation data split ratio |
-
-### 4. Output Formats
-
-#### Summary Output
-
-- Type: String
-- Format: Clean text without special tokens
-- Length: Limited by max_summary_len
-
-#### Evaluation Metrics
-
-```python
-{
-    'rouge1': float,  # ROUGE-1 F1 score
-    'rouge2': float,  # ROUGE-2 F1 score
-    'rougeL': float   # ROUGE-L F1 score
-}
-```
-
-### 5. Error Handling
-
-The API includes comprehensive error handling for common issues:
+## Error Handling
 
 ```python
 try:
     summary = summarizer.summarize(text)
 except ValueError as e:
-    print(f"Invalid input: {e}")
+    logger.error(f"Invalid input format: {e}")
 except RuntimeError as e:
-    print(f"Model error: {e}")
+    logger.error(f"Model prediction failed: {e}")
+except Exception as e:
+    logger.error(f"Unexpected error: {e}")
 ```
 
-Common Errors:
-
+Common Error Types:
 - `ValueError`: Invalid input format or length
-- `RuntimeError`: Model loading or prediction errors
-- `FileNotFoundError`: Missing model or tokenizer files
+- `RuntimeError`: Model prediction or loading issues
+- `FileNotFoundError`: Missing model files
+- `MemoryError`: Insufficient system resources
 
-### 6. Best Practices
+## Evaluation Metrics
 
-1. Data Preparation
-
-   - Clean and preprocess text data
-   - Ensure balanced dataset
-   - Remove duplicates and invalid entries
-
-2. Model Training
-
-   - Start with default parameters
-   - Monitor validation loss
-   - Use early stopping
-   - Save best performing model
-
-3. Production Use
-   - Pre-load model
-   - Batch process when possible
-   - Implement proper error handling
-   - Monitor performance metrics
-
-### 7. Examples
-
-#### Complete Training Pipeline
+The API provides comprehensive evaluation using ROUGE metrics:
 
 ```python
-# Initialize
-summarizer = SummarizerPipeline(
-    max_text_len=150,
-    max_summary_len=10
-)
-
-# Prepare data
-x_tr, x_val, y_tr, y_val = summarizer.prepare_data("data.csv")
-
-# Train
-history = summarizer.train(
-    x_tr, y_tr, x_val, y_val,
-    epochs=50,
-    batch_size=512
-)
-
-# Save
-summarizer.save_model(
-    model_path='model.keras',
-    x_tokenizer_path='x_tok.pickle',
-    y_tokenizer_path='y_tok.pickle'
-)
-
-# Evaluate
-scores = summarizer.evaluate(x_val, y_val)
-print(f"ROUGE-1: {scores['rouge1']:.4f}")
+{
+    'rouge1': 0.XXX,  # Precision, recall, F1 for unigrams
+    'rouge2': 0.XXX,  # Precision, recall, F1 for bigrams
+    'rougeL': 0.XXX   # Longest common subsequence based scoring
+}
 ```
 
-#### Batch Processing
-
-```python
-texts = [
-    "First text to summarize...",
-    "Second text to summarize...",
-    "Third text to summarize..."
-]
-
-summaries = [summarizer.summarize(text) for text in texts]
-```
+For questions or issues, please consult our documentation or open an issue in our repository.
