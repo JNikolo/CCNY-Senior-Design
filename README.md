@@ -1,8 +1,6 @@
 <!-- Back to top link -->
 <a name="readme-top"></a>
 
-[![Contributors][contributors-shield]][contributors-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
 
 <!-- PROJECT LOGO -->
 <div align="center">
@@ -25,7 +23,7 @@
         <li><a href="#key-features">Key Features</a></li>
       </ul>
     </li>
-    <li><a href="#project-proposal">Project Proposal</a></li>
+    <li><a href="#project-presentations">Project Presentations</a></li>
     <li><a href="#dataset">Dataset</a></li>
     <li>
       <a href="#getting-started">Getting Started</a>
@@ -40,9 +38,14 @@
 </details>
 
 ## Team Members
-- [Jair Ruiz](https://github.com/JNikolo) - Leader
-- [Usman Abbas](https://github.com/uscod) - Systems Savvy
-- [Evan Perez](https://github.com/evanperez444) - Tech-Smith
+- [Jair Ruiz](https://github.com/JNikolo)  
+  [![LinkedIn](https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555)](https://linkedin.com/in/jair-ruiz)
+
+- [Usman Abbas](https://github.com/uscod)  
+  [![LinkedIn](https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555)](https://www.linkedin.com/in/usman-abbas-4b7770317/)
+
+- [Evan Perez](https://github.com/evanperez444)  
+  [![LinkedIn](https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555)](https://www.linkedin.com/in/perezevan/)
 
 ## Quick Links
 - [Notebooks for training model, data mining, and evaluation](Notebooks/)
@@ -133,8 +136,16 @@ The application should now be running at:
 - Frontend: http://localhost:8501
 - Backend API: http://127.0.0.1:5000
 
-## Project Proposal
-You can access our project proposal [here](SD_Propject_Proposal.pdf). For a summarized version, check the slides of our final presentation [here](SD_Final_presentation.pdf).
+## Project Presentations
+- [Project Proposal](https://docs.google.com/presentation/d/1FeWjZ08U_bxXY8HETvEQ2Stk9Us1oO6mexBh0WYTLHo/edit?usp=sharing)
+- [First Update](https://docs.google.com/presentation/d/1zdITAq-Jup3Cn-_ZQrCusIorHMXZGKbc2iP00UaLSrc/edit?usp=sharing)
+- [Second Update](https://docs.google.com/presentation/d/1NVGF9PX7dp-oi380DOlgTdgCqsds3E0KZhDJIq4OuNU/edit?usp=sharing)
+- [Third Update](https://docs.google.com/presentation/d/1DOyjDkYukcNkbUq47O0cVic0O2sxrRK_Cjq6lpjPpFQ/edit?usp=sharing)
+- [Midterm Presentation](https://docs.google.com/presentation/d/1ieUe0iN5Ay0Ja77RSPIDyiXBMAPUYFfZ0d9_BM9R40k/edit?usp=sharing)
+- [Code Organization](https://docs.google.com/presentation/d/1SSujFJub1Fq22ds0xiPLN-ORdPxhlYHpzAVCumiEA20/edit?usp=sharing)
+- [Project Poster](https://docs.google.com/presentation/d/1rAOGZ5JD9jo_wqC32g5U0crWHvT0b_cgT7wWeayUvbc/edit?usp=sharing)
+- [Final Project Presentation](https://docs.google.com/presentation/d/1Bt1WlfJEjnX0RuZc9flhsH_Rc4YFNu_zAqJ24SBATzk/edit?usp=sharing)
+
 
 ## Dataset
 This project uses the [Amazon Fine Food Reviews dataset](https://www.kaggle.com/datasets/snap/amazon-fine-food-reviews), which includes:
