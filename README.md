@@ -53,6 +53,8 @@
 - [Code to train the Deep Learning Model easily](api/)
 
 ## RAG Playground
+![WhatsApp Image 2024-12-02 at 13 22 23_0b15d46c](https://github.com/user-attachments/assets/37cec930-a51e-44bd-bb29-dea78678f907)
+
 This project focuses on building/finetuning a deep learning model to perform abstractive text summarization. Additionally, the project aims to create an interactive platform for hands-on exploration of Retrieval-Augmented Generation (RAG) systems. Users will be able to compare the performance of the standalone model with that of the RAG system in summarization tasks.
 
 ![RAG Playground Screenshot](https://github.com/JNikolo/CCNY-Senior-Design/assets/125705821/6c4abf42-2fba-4084-a32c-974465161a3d)
