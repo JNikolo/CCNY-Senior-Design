@@ -51,6 +51,7 @@
 - [Notebooks for training model, data mining, and evaluation](Notebooks/)
 - [Code for the full-stack application](RAG_Playground/)
 - [Code to train the Deep Learning Model easily](api/)
+- ⌞‼⌝ [Project Final Report Document](https://docs.google.com/document/d/1ULCsQyWiKkRIXwG25bPKsxRUIvLo9e4pVbrY7XOFeO4/edit?usp=sharing) ⌞‼⌝
 
 ## RAG Playground
 ![WhatsApp Image 2024-12-02 at 13 22 23_0b15d46c](https://github.com/user-attachments/assets/37cec930-a51e-44bd-bb29-dea78678f907)
